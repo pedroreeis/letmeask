@@ -44,6 +44,11 @@ export function Home() {
       return;
     }
 
+    if (roomRef.val().endedAt) {
+      toast.error("Esta sala está encerrada!");
+      return;
+    }
+
     history.push(`/rooms/${roomCode}`)
 
     toast.success("Você entrou em uma sala!");
