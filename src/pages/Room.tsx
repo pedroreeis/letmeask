@@ -13,7 +13,7 @@ import { useAuth } from '../hooks/useAuth';
 
 import { database } from '../services/firebase';
 
-import { FormEvent, useState  } from 'react';
+import { FormEvent, useEffect, useState  } from 'react';
 import { useRoom } from '../hooks/useRoom';
 
 type RoomParams = {
@@ -29,6 +29,16 @@ export function Room() {
   const roomId = params.id;
 
   const { questions, title } = useRoom(roomId);
+
+  useEffect(() => {
+    const roomRef = database.ref(`rooms/${roomId}`);
+
+    roomRef.get().then(room => {
+      if(room.val().endedAt) {
+        history.push('/');
+      }
+    })
+  }, [roomId, history])
 
   async function handleLogin() {
     await signInWithGoogle()
