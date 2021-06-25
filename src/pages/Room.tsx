@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 import logoImg from '../assets/images/logo.svg';
 
@@ -21,13 +21,21 @@ type RoomParams = {
 }
 
 export function Room() {
-  const {user} = useAuth();
+  const {user, signInWithGoogle} = useAuth();
   const params = useParams<RoomParams>();
   const [newQuestion, setNewQuestion] = useState('');
+  const history = useHistory();
 
   const roomId = params.id;
 
   const { questions, title } = useRoom(roomId);
+
+  async function handleLogin() {
+    await signInWithGoogle()
+    history.push(`/rooms/${roomId}`);
+
+    toast.success("Você logou com sucesso!");
+  }
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
@@ -104,7 +112,7 @@ export function Room() {
                 <span>{user.name}</span>
               </div>
             ) : (
-              <span>Para enviar uma pergunta, <button>faça seu login</button>.</span>
+              <span>Para enviar uma pergunta, <button onClick={handleLogin}>faça seu login</button>.</span>
             ) }
             <Button type="submit" disabled={!user}>Enviar pergunta</Button>
           </div>
