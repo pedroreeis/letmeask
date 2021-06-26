@@ -28,6 +28,14 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [Firebase](https://firebase.google.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 
+## 🚀 Como Testar ?
+
+Depois de você se autenticar e criar uma sala, você será redirecionado para o painel admin, onde poderá controlar as perguntas: 
+**(Marcar como respondida, Marcar como em destaque e excluir)**
+
+No canto superior direito, é possivel copiar o ID da sala, onde você irá mandar para sua audiencia (ou você mesmo).
+Então, é entrar na sala como usuario pela Home Page.
+
 ## 🚀 Como executar
 
 Clone o projeto e acesse a pasta do mesmo.
