@@ -16,6 +16,10 @@
 
 <br>
 
+## 🚀 Como acessar
+
+Você pode acessar e testar a aplicação [clicando aqui.](https://letmeask-d33d3.web.app/)
+
 ## 🧪 Tecnologias
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
