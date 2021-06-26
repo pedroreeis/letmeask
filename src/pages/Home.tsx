@@ -20,6 +20,10 @@ export function Home() {
   const { user, signInWithGoogle, signInWithGithub } = useAuth()
   const [roomCode, setRoomCode] = useState('');
 
+  async function handleCreateRoom() {
+    history.push('/rooms/new');
+  }
+
   async function handleCreateRoomGoogle() {
     if(!user) {
       await signInWithGoogle()
@@ -76,7 +80,15 @@ export function Home() {
       <Toaster />
         <div className="main-content">
           <img src={logoImg} alt="Logomarca da letmeask" />
-          { user ? (<></>) : (
+          { user ? (
+          <>
+          <button onClick={handleCreateRoom} className="create-room btn">
+          Crie sua sala
+          </button>
+
+          <div className="separator">ou entre em uma sala</div>
+          </>
+          ) : (
           <>
           <button onClick={handleCreateRoomGoogle} className="create-room google">
           <img src={googleIconImg} alt="Logo do google" />
