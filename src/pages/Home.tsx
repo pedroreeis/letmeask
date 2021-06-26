@@ -76,16 +76,21 @@ export function Home() {
       <Toaster />
         <div className="main-content">
           <img src={logoImg} alt="Logomarca da letmeask" />
+          { user ? (<></>) : (
+          <>
           <button onClick={handleCreateRoomGoogle} className="create-room google">
-            <img src={googleIconImg} alt="Logo do google" />
-            Crie sua sala com a Google
+          <img src={googleIconImg} alt="Logo do google" />
+          Crie sua sala com a Google
           </button>
+
           <button onClick={handleCreateRoomGithub} className="create-room github">
-            <img src={githubIconImg} alt="Logo do github" />
-            Crie sua sala com o Github
+          <img src={githubIconImg} alt="Logo do github" />
+          Crie sua sala com o Github
           </button>
           <div className="separator">ou entre em uma sala</div>
-          
+          </>
+          )}
+        
           <form onSubmit={handleJoinRoom}>
             <input 
              type="text"

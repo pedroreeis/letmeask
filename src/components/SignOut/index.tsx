@@ -11,6 +11,7 @@ export const SignOut: React.FC = () => {
 
 	return (
 		<Container type="button" aria-label="Deslogar a conta" onClick={signOut}>
+			<img src={user.avatar} alt={user.name} />
 			<SignOutIcon />
 		</Container>
 	);

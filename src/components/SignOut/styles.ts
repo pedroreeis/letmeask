@@ -14,6 +14,12 @@ export const Container = styled.button`
 	&:hover {
 		filter: brightness(0.7);
 	}
+
+	img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+  }
 `;
 
 export const SignOutIcon = styled(VscSignOut)`
