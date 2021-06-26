@@ -9,6 +9,11 @@ export const Container = styled.button`
 	cursor: pointer;
 	z-index: 50;
 	border-radius: 8px;
+	border: none;
+
+	&:hover {
+		filter: brightness(0.7);
+	}
 `;
 
 export const SignOutIcon = styled(VscSignOut)`

@@ -92,11 +92,10 @@
   }
 
   .create-room {
-    margin-top: 64px;
+    margin-top: 34px;
     height: 50px;
     border-radius: 8px;
     font-weight: 500;
-    background-color: #ea4335;
     color: #fff;
 
     display: flex;
@@ -115,6 +114,15 @@
     &:hover {
       filter: brightness(0.9);
     }
+  }
+
+  .google {
+    background-color: #ea4335;
+  }
+
+  .github {
+    background-color: #e9e9e9;
+    color: #000;
   }
 
   .separator {
