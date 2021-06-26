@@ -1,5 +1,5 @@
 import { useAuth } from '../hooks/useAuth';
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom';
 
 import toast, { Toaster } from 'react-hot-toast';
@@ -7,6 +7,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import illustrationImg from '../assets/images/illustration.svg'
 import logoImg from '../assets/images/logo.svg';
 
+import { PageLoading } from "../components/PageLoading";
 import { Button } from '../components/Button'
 import { database } from '../services/firebase';
 
@@ -17,6 +18,13 @@ export function NewRoom() {
    const history = useHistory();
 
   const [newRoom, setNewRoom] = useState('');
+
+  useEffect(() => {
+		if (user === null) {
+			toast.success("Usuário não autenticado!");
+			history.push("/");
+		}
+	}, [history, user]);
 
   async function handleCreateRoom(event: FormEvent) {
     event.preventDefault();
@@ -38,6 +46,10 @@ export function NewRoom() {
     toast.success("Você criou uma sala!");
   }
 
+	if (user === undefined) {
+		return <PageLoading />;
+	}
+  
   return (
     <div id="page-auth">
       <aside>

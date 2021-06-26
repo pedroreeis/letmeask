@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useState, useEffect } from 'react'
 import { firebase, auth } from '../services/firebase'
+import { toast } from "react-hot-toast";
 
 type User = {
   id: string,
@@ -8,8 +9,9 @@ type User = {
 }
 
 type AuthContextType = {
-  user: User | undefined;
+  user: User | undefined | null;
   signInWithGoogle: () => Promise<void>;
+  signOut: () => Promise<void>;
 }
 
 type AuthContextProviderProps = {
@@ -20,7 +22,7 @@ export const AuthContext = createContext({} as AuthContextType);
 
 export function AuthContextProvider(props: AuthContextProviderProps) {
 
-  const [user, setUser] = useState<User>();
+  const [user, setUser] = useState<User | null>();
 
   useEffect(()  => {
    const unsubscribe = auth.onAuthStateChanged(user => {
@@ -36,6 +38,8 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
           name: displayName,
           avatar: photoURL
         });
+      } else {
+        setUser(null);
       }
     })
 
@@ -64,8 +68,22 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
       }
   }
 
+  const signOut = async () => {
+		const signOutConfirm = window.confirm("Tem certeza que deseja deslogar?");
+
+		if (signOutConfirm) {
+			try {
+				await auth.signOut();
+
+				toast.success("Deslogado com sucesso!");
+			} catch (error) {
+				toast.error(error.message);
+			}
+		}
+	};
+
   return (
-    <AuthContext.Provider value={{ user, signInWithGoogle }}>
+    <AuthContext.Provider value={{ user, signInWithGoogle, signOut }}>
       {props.children}
     </AuthContext.Provider>
   );

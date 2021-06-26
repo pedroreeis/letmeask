@@ -7,6 +7,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { RoomCode } from '../components/RoomCode'
 import { Button } from '../components/Button'
 import { Question } from '../components/Question'
+import { PageLoading } from '../components/PageLoading';
 
 import '../styles/room.scss';
 import { useAuth } from '../hooks/useAuth';
@@ -28,7 +29,7 @@ export function Room() {
 
   const roomId = params.id;
 
-  const { questions, title } = useRoom(roomId);
+  const { questions, title, endedAt } = useRoom(roomId);
 
   useEffect(() => {
     const roomRef = database.ref(`rooms/${roomId}`);
@@ -39,13 +40,6 @@ export function Room() {
       }
     })
   }, [roomId, history])
-
-  async function handleLogin() {
-    await signInWithGoogle()
-    history.push(`/rooms/${roomId}`);
-
-    toast.success("Você logou com sucesso!");
-  }
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
@@ -90,6 +84,10 @@ export function Room() {
     }
   }
 
+  if (endedAt === undefined) {
+		return <PageLoading />;
+	}
+
   return (
     <div id="page-room">
       <header>
@@ -122,7 +120,7 @@ export function Room() {
                 <span>{user.name}</span>
               </div>
             ) : (
-              <span>Para enviar uma pergunta, <button onClick={handleLogin}>faça seu login</button>.</span>
+              <span>Para enviar uma pergunta, <button onClick={signInWithGoogle}>faça seu login</button>.</span>
             ) }
             <Button type="submit" disabled={!user}>Enviar pergunta</Button>
           </div>

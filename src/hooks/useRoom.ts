@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { database } from "../services/firebase";
 import { useAuth } from "./useAuth";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
 type QuestionType = {
   id: string,
@@ -29,9 +31,12 @@ type FirebaseQuestions = Record<string, {
 }>
 
 export function useRoom(roomId: string) {
+  const history = useHistory();
   const { user } = useAuth();
   const [questions, setQuestions] = useState<QuestionType[]>([]);
   const [title, setTitle] = useState('');
+  const [endedAt, sedEndedAt] = useState<boolean | string | undefined>();
+  const [authorId, setAuthorId] = useState<string>("");
 
   useEffect(() => {
     const roomRef = database.ref(`rooms/${roomId}`);
@@ -53,7 +58,9 @@ export function useRoom(roomId: string) {
       })
 
       setTitle(databaseRoom.title);
-      setQuestions(parsedQuestions)
+      setQuestions(parsedQuestions);
+      sedEndedAt(databaseRoom.endedAt || false);
+      setAuthorId(databaseRoom.authorId);
     })
 
     return () => {
@@ -61,5 +68,12 @@ export function useRoom(roomId: string) {
     }
   }, [roomId, user?.id])
 
-  return { questions, title }
+  useEffect(() => {
+		if (endedAt) {
+			toast.info("Sala fechada!");
+			history.push("/");
+		}
+	}, [endedAt, history]);
+
+  return { questions, title, endedAt, authorId }
 }

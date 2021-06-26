@@ -19,18 +19,29 @@ import { useRoom } from '../hooks/useRoom';
 import { database } from '../services/firebase';
 import { useAuth } from '../hooks/useAuth';
 import { useEffect } from 'react';
+import { PageLoading } from "../components/PageLoading";
 
 type RoomParams = {
   id: string;
 }
 
 export function AdminRoom() {
-  //const {user} = useAuth();
+  const {user} = useAuth();
   const params = useParams<RoomParams>();
   const history = useHistory();
   const roomId = params.id;
 
-  const { questions, title } = useRoom(roomId);
+  const { questions, title, endedAt, authorId } = useRoom(roomId);
+
+  useEffect(() => {
+		if (user === null) {
+			toast.success("Usuário não autenticado!");
+			history.push("/");
+		} else if (authorId && user?.id !== authorId) {
+			toast.success("Permissão negada!");
+			history.push("/");
+		}
+	}, [history, user, authorId]);
 
   async function handleEndRoom() {
     await database.ref(`rooms/${roomId}`).update({
@@ -61,6 +72,14 @@ export function AdminRoom() {
       isHighlighted: true,
     }) 
   }
+
+	if (
+		user === undefined ||
+		endedAt === undefined ||
+		!authorId
+	) {
+		return <PageLoading />;
+	}
 
   return (
     <div id="page-room">

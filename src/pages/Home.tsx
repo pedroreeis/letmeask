@@ -8,7 +8,6 @@ import toast, { Toaster } from 'react-hot-toast';
 
 import { Button } from '../components/Button'
 
-
 import '../styles/auth.scss';
 import { useAuth } from '../hooks/useAuth';
 import { FormEvent } from 'react';
