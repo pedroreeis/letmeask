@@ -6,6 +6,7 @@ import googleIconImg from '../assets/images/google-icon.svg';
 import githubIconImg from '../assets/images/github-icon.svg';
 
 import toast, { Toaster } from 'react-hot-toast';
+import { PageLoading } from '../components/PageLoading';
 
 import { Button } from '../components/Button'
 
@@ -68,6 +69,10 @@ export function Home() {
     toast.success("Você entrou em uma sala!");
   }
 
+  if (user === undefined) {
+		return <PageLoading />;
+	}
+  
   return (
     <div id="page-auth">
       <aside>

@@ -6,18 +6,8 @@ import { Room } from './pages/Room';
 import { AdminRoom } from './pages/AdminRoom';
 import { SignOut } from "./components/SignOut";
 
-import { toast } from "react-toastify";
-
 import { AuthContextProvider } from './contexts/AuthContext'
 
-toast.configure({
-	position: "bottom-right",
-	autoClose: 3000,
-	closeOnClick: true,
-	pauseOnFocusLoss: true,
-	draggable: true,
-	pauseOnHover: true,
-});
 
 function App() {
   return (
