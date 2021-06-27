@@ -67,11 +67,11 @@ Este é um projeto desenvolvido durante a **[Next Level Week Together](https://n
 
 Do projeto inicial, eu implementei algumas funcionalidades novas, como:
 
-## Rotas Privadas
-## Dark Theme
-## SignOut
-## 404 Pages
-## Layout custom
+# Rotas Privadas
+# Dark Theme
+# SignOut
+# 404 Pages
+# Layout custom
 
 
 ## 🔖 Layout
