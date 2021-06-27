@@ -20,6 +20,7 @@ import { database } from '../services/firebase';
 import { useAuth } from '../hooks/useAuth';
 import { useEffect } from 'react';
 import { PageLoading } from "../components/PageLoading";
+import { useTheme } from '../hooks/useTheme';
 
 type RoomParams = {
   id: string;
@@ -32,6 +33,7 @@ export function AdminRoom() {
   const roomId = params.id;
 
   const { questions, title, endedAt, authorId } = useRoom(roomId);
+  const { theme } = useTheme();
 
   useEffect(() => {
 		if (user === null) {
@@ -82,7 +84,7 @@ export function AdminRoom() {
 	}
 
   return (
-    <div id="page-room">
+    <div id="page-room" className={theme}>
       <header>
         <div className="content">
           <img src={logoImg} alt="Logomarca da letmeask" />

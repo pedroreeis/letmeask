@@ -9,6 +9,11 @@
 
   display: flex;
 
+  &.dark {
+    background: #333;
+    color: #fff;
+  }
+
   > div {
     background-color: #835afd;
     padding: 0 12px;

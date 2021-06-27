@@ -7,13 +7,17 @@ import { AdminRoom } from './pages/AdminRoom';
 import { SignOut } from "./components/SignOut";
 
 import { AuthContextProvider } from './contexts/AuthContext'
+import { ThemeContextProvider } from './contexts/ThemeContext';
+import ThemeSelector from './components/ThemeSelector';
 
 
 function App() {
   return (
     <BrowserRouter>
+      <ThemeContextProvider>
        <AuthContextProvider>
          <SignOut />
+         <ThemeSelector />
         <Switch>
          <Route path="/" exact component={Home} />
          <Route path="/rooms/new" component={NewRoom} />
@@ -21,7 +25,7 @@ function App() {
          <Route path="/admin/rooms/:id" component={AdminRoom} />
         </Switch>
        </AuthContextProvider>
-
+      </ThemeContextProvider>
     </BrowserRouter>
   );
 }

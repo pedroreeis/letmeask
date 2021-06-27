@@ -12,12 +12,15 @@ import { Button } from '../components/Button'
 import { database } from '../services/firebase';
 
 import '../styles/auth.scss';
+import { useTheme } from '../hooks/useTheme';
 
 export function NewRoom() {
    const { user } = useAuth()
    const history = useHistory();
 
   const [newRoom, setNewRoom] = useState('');
+
+  const { theme } = useTheme();
 
   useEffect(() => {
 		if (user === null) {
@@ -51,7 +54,7 @@ export function NewRoom() {
 	}
   
   return (
-    <div id="page-auth">
+    <div id="page-auth" className={theme}>
       <aside>
         <img src={illustrationImg} alt="Ilustração simbolizando perguntas e respostas." />
         <strong> Toda pergunta tem uma resposta. </strong>
@@ -60,21 +63,22 @@ export function NewRoom() {
 
       <main>
       <Toaster />
-        <div className="main-content">
+        <div className={"main-content"}>
           <img src={logoImg} alt="Logomarca da letmeask" />
-          <h2>Criar uma nova sala</h2>
+          <h2 className={theme}>Criar uma nova sala</h2>
           <form onSubmit={handleCreateRoom}>
             <input 
              type="text"
              placeholder="Nome da sala"
              onChange={event => setNewRoom(event.target.value)}
              value={newRoom}
+             className={theme}
             />
             <Button type="submit">
              Criar sala
             </Button>     
           </form>
-          <p>
+          <p className={theme}>
             Quer entrar em uma sala já existente? <Link to="/">clique aqui</Link>
           </p>
         </div>

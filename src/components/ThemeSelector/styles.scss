@@ -1,0 +1,25 @@
+.container {
+	position: fixed;
+	top: 1.6rem;
+	right: 47%;
+	cursor: pointer;
+	z-index: 51;
+	border-radius: 8px;
+	border: none;
+  background: transparent;
+
+  button {
+    border: none;
+    background: transparent;
+  }
+
+  &:hover {
+		filter: brightness(0.7);
+	}
+
+  img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+  }
+}

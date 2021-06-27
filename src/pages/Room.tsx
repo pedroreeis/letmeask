@@ -17,6 +17,7 @@ import { database } from '../services/firebase';
 
 import { FormEvent, useEffect, useState  } from 'react';
 import { useRoom } from '../hooks/useRoom';
+import { useTheme } from '../hooks/useTheme';
 
 type RoomParams = {
   id: string;
@@ -31,6 +32,8 @@ export function Room() {
   const roomId = params.id;
 
   const { questions, title, endedAt, isOpen } = useRoom(roomId);
+
+  const { theme } = useTheme();
 
   useEffect(() => {
     const roomRef = database.ref(`rooms/${roomId}`);
@@ -90,7 +93,7 @@ export function Room() {
 	}
 
   return (
-    <div id="page-room">
+    <div id="page-room" className={theme}>
       <header>
         <div className="content">
           <img src={logoImg} alt="Logomarca da letmeask" />
@@ -102,8 +105,8 @@ export function Room() {
       <Toaster />
       <ModalComponent show={isOpen} />
 
-        <div className="room-title">
-          <h1>Sala {title}</h1>
+        <div className={"room-title"}>
+          <h1 className={theme}>Sala {title}</h1>
 
           { questions.length > 0 && <span>{questions.length} pergunta(s)</span> }
         </div>
@@ -113,13 +116,14 @@ export function Room() {
             placeholder="O que você deseja perguntar ?"
             onChange={event => setNewQuestion(event.target.value)}
             value={newQuestion}
+            className={theme}
           />
 
           <div className="form-footer">
             { user ? (
               <div className="user-info">
                 <img src={user.avatar} alt={user.name} />
-                <span>{user.name}</span>
+                <span className={theme}>{user.name}</span>
               </div>
             ) : (
               <span>Para enviar uma pergunta, <button onClick={signInWithGoogle}>faça seu login</button>.</span>

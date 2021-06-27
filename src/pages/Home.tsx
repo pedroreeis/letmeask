@@ -15,11 +15,14 @@ import { useAuth } from '../hooks/useAuth';
 import { FormEvent } from 'react';
 import { useState } from 'react';
 import { database } from '../services/firebase';
+import { useTheme } from '../hooks/useTheme';
 
 export function Home() {
   const history = useHistory();
   const { user, signInWithGoogle, signInWithGithub } = useAuth()
   const [roomCode, setRoomCode] = useState('');
+
+  const { theme } = useTheme();
 
   async function handleCreateRoom() {
     history.push('/rooms/new');
@@ -74,7 +77,7 @@ export function Home() {
 	}
   
   return (
-    <div id="page-auth">
+    <div id="page-auth" className={theme}>
       <aside>
         <img src={illustrationImg} alt="Ilustração simbolizando perguntas e respostas." />
         <strong> Toda pergunta tem uma resposta. </strong>
@@ -114,6 +117,7 @@ export function Home() {
              placeholder="Digite o código da sala"
              onChange={event => setRoomCode(event.target.value)}
              value={roomCode}
+             className={theme}
             />
             <Button type="submit">
               Entrar na sala

@@ -3,6 +3,11 @@
   align-items: stretch;
   height: 100vh;
 
+  &.dark {
+    background: #333;
+    color: #fff;
+  }
+
   aside {
     flex: 7;
 
@@ -69,6 +74,11 @@
         padding: 0 16px;
         background: #fff;
         border: 1px solid #a8a8b3;
+
+        &.dark {
+          background: #333;
+          color: #fff;
+        }
       }
 
       button {
