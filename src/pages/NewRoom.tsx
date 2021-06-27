@@ -9,6 +9,8 @@ import logoImg from '../assets/images/logo.svg';
 
 import { PageLoading } from "../components/PageLoading";
 import { Button } from '../components/Button'
+import { ThemeSelector } from '../components/ThemeSelector'
+
 import { database } from '../services/firebase';
 
 import '../styles/auth.scss';
@@ -55,6 +57,9 @@ export function NewRoom() {
   
   return (
     <div id="page-auth" className={theme}>
+      <header>
+      <ThemeSelector />
+      </header>
       <aside>
         <img src={illustrationImg} alt="Ilustração simbolizando perguntas e respostas." />
         <strong> Toda pergunta tem uma resposta. </strong>

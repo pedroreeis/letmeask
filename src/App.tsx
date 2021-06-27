@@ -6,11 +6,10 @@ import { Room } from './pages/Room';
 import { AdminRoom } from './pages/AdminRoom';
 import { NotFound } from './pages/Notfound';
 
-import { SignOut } from "./components/SignOut";
 
 import { AuthContextProvider } from './contexts/AuthContext'
 import { ThemeContextProvider } from './contexts/ThemeContext';
-import ThemeSelector from './components/ThemeSelector';
+
 
 
 function App() {
@@ -18,8 +17,6 @@ function App() {
     <BrowserRouter>
       <ThemeContextProvider>
        <AuthContextProvider>
-       <ThemeSelector />
-         <SignOut />
         <Switch>
          <Route path="/" exact component={Home} />
          <Route path="/rooms/new" component={NewRoom} />

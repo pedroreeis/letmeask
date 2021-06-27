@@ -38,6 +38,12 @@
     }
   }
 
+  @media only screen and (max-width: 800px) {
+    aside {
+      display: none;
+    }
+  }
+  
   main {
     flex: 8;
 
@@ -136,7 +142,7 @@
     color: #000;
   }
 
-  .btn {
+  .btn1 {
     background-color: #835afd;
     margin-bottom: 20px;
   }

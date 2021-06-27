@@ -30,6 +30,12 @@
     }
   }
 
+  @media only screen and (max-width: 600px) {
+    &.outlined {
+      width: 35px;
+    }
+  }
+
   &:not(:disabled):hover {
     filter: brightness(0.9);
   }

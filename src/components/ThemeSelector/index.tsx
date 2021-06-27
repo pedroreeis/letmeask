@@ -3,16 +3,15 @@ import './styles.scss';
 
 import btnImg from '../../assets/images/theme.svg'
 
-function ThemeSelector() {
+export function ThemeSelector() {
+  // eslint-disable-next-line
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="container">
+    <div className="container1">
     <button onClick={toggleTheme}>
-      <img src={btnImg} alt={`Alterar Tema: ${theme}`}/>
+      <img src={btnImg} alt={theme}/>
     </button>
     </div>
   );
 };
-
-export default ThemeSelector;

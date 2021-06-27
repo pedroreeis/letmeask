@@ -9,6 +9,8 @@ import toast, { Toaster } from 'react-hot-toast';
 import { PageLoading } from '../components/PageLoading';
 
 import { Button } from '../components/Button'
+import { SignOut } from '../components/SignOut';
+import { ThemeSelector }  from '../components/ThemeSelector'
 
 import '../styles/auth.scss';
 import { useAuth } from '../hooks/useAuth';
@@ -78,6 +80,11 @@ export function Home() {
   
   return (
     <div id="page-auth" className={theme}>
+      <header>
+        <ThemeSelector />
+        <SignOut />
+      </header>
+
       <aside>
         <img src={illustrationImg} alt="Ilustração simbolizando perguntas e respostas." />
         <strong> Toda pergunta tem uma resposta. </strong>
@@ -90,7 +97,7 @@ export function Home() {
           <img src={logoImg} alt="Logomarca da letmeask" />
           { user ? (
           <>
-          <button onClick={handleCreateRoom} className="create-room btn">
+          <button onClick={handleCreateRoom} className="create-room btn1">
           Crie sua sala
           </button>
 

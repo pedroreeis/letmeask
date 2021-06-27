@@ -20,6 +20,7 @@ import { database } from '../services/firebase';
 import { useAuth } from '../hooks/useAuth';
 import { useEffect } from 'react';
 import { PageLoading } from "../components/PageLoading";
+import { ThemeSelector } from '../components/ThemeSelector'
 import { useTheme } from '../hooks/useTheme';
 
 type RoomParams = {
@@ -89,6 +90,7 @@ export function AdminRoom() {
         <div className="content">
           <img src={logoImg} alt="Logomarca da letmeask" />
           <div>
+            <ThemeSelector  />
             <RoomCode code={roomId} />
             <Button isOutlined onClick={handleEndRoom}>Encerrar sala</Button>
           </div>
@@ -105,7 +107,9 @@ export function AdminRoom() {
         </div>
 
         <div className="question-list">
-        {questions.map(questions => {
+        {questions
+        .sort((a, b) => b.likeCount - a.likeCount)
+        .map(questions => {
           return (
             <Question 
               key={questions.id}
