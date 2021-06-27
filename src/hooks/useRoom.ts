@@ -38,6 +38,8 @@ export function useRoom(roomId: string) {
   const [endedAt, sedEndedAt] = useState<boolean | string | undefined>();
   const [authorId, setAuthorId] = useState<string>("");
 
+  const [isOpen, setIsOpen] = useState(false);
+
   useEffect(() => {
     const roomRef = database.ref(`rooms/${roomId}`);
 
@@ -71,9 +73,11 @@ export function useRoom(roomId: string) {
   useEffect(() => {
 		if (endedAt) {
 			toast.info("Sala fechada!");
-			history.push("/");
+
+      setIsOpen(true);
+			//history.push("/");
 		}
 	}, [endedAt, history]);
 
-  return { questions, title, endedAt, authorId }
+  return { questions, title, endedAt, authorId, isOpen, setIsOpen }
 }

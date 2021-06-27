@@ -8,6 +8,7 @@ import { RoomCode } from '../components/RoomCode'
 import { Button } from '../components/Button'
 import { Question } from '../components/Question'
 import { PageLoading } from '../components/PageLoading';
+import { ModalComponent } from '../components/Modal';
 
 import '../styles/room.scss';
 import { useAuth } from '../hooks/useAuth';
@@ -29,7 +30,7 @@ export function Room() {
 
   const roomId = params.id;
 
-  const { questions, title, endedAt } = useRoom(roomId);
+  const { questions, title, endedAt, isOpen } = useRoom(roomId);
 
   useEffect(() => {
     const roomRef = database.ref(`rooms/${roomId}`);
@@ -99,6 +100,7 @@ export function Room() {
       
       <main>
       <Toaster />
+      <ModalComponent show={isOpen} />
 
         <div className="room-title">
           <h1>Sala {title}</h1>
